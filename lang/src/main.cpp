@@ -1,8 +1,7 @@
-#include <iostream>
+#include "./compiler/compiler.hpp"
 
 int main(void)
 {
-	std::cout << "Hello, world!" << std::endl;
-
-	return 0;
+    compiler::compile_text("hello");
+    return 0;
 }
