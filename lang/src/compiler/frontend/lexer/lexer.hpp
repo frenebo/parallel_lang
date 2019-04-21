@@ -21,6 +21,8 @@ namespace front_end::lexer
     };
 
     std::variant<std::vector<token::Token>, LexError> lex_text(const std::string & text);
+    std::variant<token::Token, LexError> lex_next_token(const std::string & text, unsigned long start_idx);
+    std::variant<token::Token, LexError> lex_keyword_match(const std::string & text, unsigned long start_idx);
 }
 
 #endif

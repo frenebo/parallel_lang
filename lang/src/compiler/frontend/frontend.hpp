@@ -12,10 +12,12 @@ namespace front_end
     class CompileError
     {
     public:
-        CompileError(std::string message);
+        CompileError(std::string message, unsigned long position);
         const std::string & message() const;
+        unsigned long position() const;
     private:
         std::string _message;
+        unsigned long _position;
     };
 
     std::variant<syntax_tree::program::ProgramTree, CompileError>

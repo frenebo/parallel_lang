@@ -8,6 +8,8 @@ namespace front_end::token
     enum TokenType {
         IDENTIFIER,
         WHITESPACE,
+        OPEN_PARENTHESIS,
+        CLOSE_PARENTHESIS,
         END_OF_INPUT,
     };
 

@@ -2,6 +2,6 @@
 
 int main(void)
 {
-    compiler::compile_text("hello");
+    compiler::compile_text("hello\nasdf\nline\nhmm");
     return 0;
 }

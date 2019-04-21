@@ -28,6 +28,10 @@ namespace front_end::token
             return "End of Input";
         case TokenType::WHITESPACE:
             return "Whitespace";
+        case TokenType::OPEN_PARENTHESIS:
+            return "Open Parenthesis";
+        case TokenType::CLOSE_PARENTHESIS:
+            return "Close Parenthesis";
         default:
             return "Unimplemented token type to string";
         }

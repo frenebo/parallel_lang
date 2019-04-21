@@ -13,7 +13,7 @@ namespace syntax_tree::statement_sequence
         StatementSequence(std::vector<statements::StatementContainer> statements);
         const std::vector<statements::StatementContainer> & statements() const;
     private:
-        std::vector<statements::StatementContainer> & _statements;
+        std::vector<statements::StatementContainer> _statements;
     };
 }
 
