@@ -3,6 +3,7 @@
 
 #include <string>
 #include <variant>
+#include <optional>
 #include <vector>
 
 #include "../token/token.hpp"
@@ -21,8 +22,10 @@ namespace front_end::lexer
     };
 
     std::variant<std::vector<token::Token>, LexError> lex_text(const std::string & text);
-    std::variant<token::Token, LexError> lex_next_token(const std::string & text, unsigned long start_idx);
-    std::variant<token::Token, LexError> lex_keyword_match(const std::string & text, unsigned long start_idx);
+    std::optional<token::Token> lex_next_token(const std::string & text, unsigned long start_idx);
+    std::optional<token::Token> lex_keyword_match(const std::string & text, unsigned long start_idx);
+    std::optional<token::Token> lex_whitespace(const std::string & text, unsigned long start_idx);
+    std::optional<token::Token> lex_identifier(const std::string & text, unsigned long start_idx);
 }
 
 #endif

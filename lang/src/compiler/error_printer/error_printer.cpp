@@ -22,7 +22,7 @@ namespace compiler::error_printer
         {
             std::string::size_type line_start_pos = it->line_pos();
             std::string::size_type line_end_pos = line_start_pos + it->line_text().length();
-            if (line_start_pos <= problem_pos && line_end_pos >= problem_pos)
+            if (line_start_pos <= problem_pos && line_end_pos > problem_pos)
             {
                 line_idx_of_problem = it - text_lines.begin();
                 problem_idx_in_line = problem_pos - line_start_pos;
@@ -49,7 +49,7 @@ namespace compiler::error_printer
             unsigned long line_num = text_lines[idx].line_idx() + 1;
             std::string line_num_str = std::to_string(line_num);
 
-            // Add spaces to previous num strings
+            // Add spaces to previous line num strings if necessary to make all same length
             if (line_num_strings.size() > 0 && line_num_str.size() > line_num_strings[0].size())
             {
                 for (auto it = line_num_strings.begin(); it != line_num_strings.end(); ++it)
@@ -66,14 +66,16 @@ namespace compiler::error_printer
         {
             std::cout <<
                 colors::green <<
-                line_num_strings[idx] <<
+                line_num_strings[idx - print_line_start] <<
                 " " <<
                 colors::white <<
                 text_lines[idx].line_text() <<
-                colors::reset;
+                colors::reset <<
+                std::endl;
         }
 
         unsigned long arrow_offset = line_num_strings[0].size() + 1 + problem_idx_in_line;
+        // std::cout << "Arrow offset: " << arrow_offset << std::endl;
         std::cout << std::string(arrow_offset, ' ') << "^" << std::endl;
 
         // for (unsigned long idx = line_idx_of_problem )
@@ -102,7 +104,6 @@ namespace compiler::error_printer
         std::string::size_type line_start_pos = 0;
         for (std::string::size_type i = 0; i < text.length(); i++)
         {
-            current_line += text[i];
             if (text[i] == '\n')
             {
                 lines.push_back(LineDescription(
@@ -114,6 +115,10 @@ namespace compiler::error_printer
                 current_line = "";
                 line_idx++;
                 line_start_pos = i + 1;
+            }
+            else
+            {
+                current_line += text[i];
             }
         }
 

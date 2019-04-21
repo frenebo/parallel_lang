@@ -1,4 +1,5 @@
 #include "./lexer.hpp"
+#include <ctype.h>
 
 namespace front_end::lexer
 {
@@ -12,23 +13,83 @@ namespace front_end::lexer
         {
             auto try_lex_next = lex_next_token(text, chars_consumed);
 
-            if (std::holds_alternative<LexError>(try_lex_next))
+            if (!try_lex_next.has_value())
             {
-                return std::get<LexError>(try_lex_next);
+                return LexError("Could not parse token", chars_consumed);
             }
+
+            token::Token result = *try_lex_next;
+
+            if (result.tok_type() != token::TokenType::WHITESPACE)
+            {
+                tokens.push_back(result);
+            }
+
+            chars_consumed += result.text().length();
         }
 
         return tokens;
     }
 
-    std::variant<token::Token, LexError> lex_next_token(const std::string & text, unsigned long start_idx)
+    std::optional<token::Token> lex_next_token(const std::string & text, unsigned long start_idx)
     {
-        auto keyword_match = lex_keyword_match(text, start_idx);
+        std::vector<std::optional<token::Token>> lex_results;
+        lex_results.push_back(lex_whitespace(text, start_idx));
+        lex_results.push_back(lex_keyword_match(text, start_idx));
+        lex_results.push_back(lex_identifier(text, start_idx));
 
-        return keyword_match;
+        std::optional<token::Token> longest_result;
+
+        for (const std::optional<token::Token> & lex_result : lex_results)
+        {
+            if (!lex_result.has_value()) continue;
+
+            if (
+                !longest_result.has_value() ||
+                lex_result->text().length() > longest_result->text().length())
+            {
+                longest_result = lex_result;
+            }
+        }
+
+        return longest_result;
     }
 
-    std::variant<token::Token, LexError> lex_keyword_match(const std::string & text, unsigned long start_idx)
+    std::optional<token::Token> lex_identifier(const std::string & text, unsigned long start_idx)
+    {
+        if (!isalpha(text[start_idx]))
+        {
+            return std::optional<token::Token>();
+        }
+
+        unsigned long size = 1;
+        while (
+            start_idx + size < text.length() &&
+            (isalnum(text[start_idx + size]) || text[start_idx + size] == '_'))
+        {
+            size++;
+        }
+
+        return token::Token(token::TokenType::IDENTIFIER, text.substr(start_idx, size));
+    }
+
+    std::optional<token::Token> lex_whitespace(const std::string & text, unsigned long start_idx)
+    {
+        if (!isspace(text[start_idx]))
+        {
+            return std::optional<token::Token>();
+        }
+
+        unsigned long size = 1;
+        while (start_idx + size < text.length() && isspace(text[start_idx + size]))
+        {
+            size++;
+        }
+
+        return token::Token(token::TokenType::WHITESPACE, text.substr(start_idx, size));
+    }
+
+    std::optional<token::Token> lex_keyword_match(const std::string & text, unsigned long start_idx)
     {
         const std::pair<std::string, token::TokenType> types[] = {
             {"(", token::TokenType::OPEN_PARENTHESIS},
@@ -65,7 +126,7 @@ namespace front_end::lexer
 
         if (longest_match_length == 0)
         {
-            return LexError("Could not parse token.", start_idx);
+            return std::optional<token::Token>();
         }
         else
         {
