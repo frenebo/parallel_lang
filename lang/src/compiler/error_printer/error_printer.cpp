@@ -75,24 +75,8 @@ namespace compiler::error_printer
         }
 
         unsigned long arrow_offset = line_num_strings[0].size() + 1 + problem_idx_in_line;
-        // std::cout << "Arrow offset: " << arrow_offset << std::endl;
+
         std::cout << std::string(arrow_offset, ' ') << "^" << std::endl;
-
-        // for (unsigned long idx = line_idx_of_problem )
-
-        // if (linex)
-
-
-
-        // //
-        // for (auto it = text_lines.rbegin(); it != text_lines.rend(); ++it)
-        // {
-
-        // }
-
-        // auto it = my_vector.rbegin(); it != my_vector.rend(); ++it
-
-        // for (std::vector::size_type i = text_lines.size() - 1; i >= 0;)
     }
 
     std::vector<LineDescription> get_text_lines(const std::string & text)

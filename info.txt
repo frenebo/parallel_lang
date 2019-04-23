@@ -1,0 +1,38 @@
+
+Parallel lang:
+Using lazy evaluation found in other languages for parallelism?
+
+function delegation?
+
+function mult(int a, int b)
+{
+    return a + b;
+}
+
+function add(int a, int b)
+{
+    return a + b;
+}
+
+????
+
+function main()
+{
+    int a = 1;
+    int b = 2;
+
+    int multiplied = mult(a, b);
+
+    result int real_mult = result multiplied;
+
+    concurrent {
+        added = {
+            return a + b;
+        };
+        conc_multiplied = mult(a, b);
+    }
+
+    promised future_mult = promised mult(a, b);
+
+    int auto_wait_add = add(a, future_mult);
+}

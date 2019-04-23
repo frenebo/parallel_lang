@@ -3,14 +3,14 @@
 int main(void)
 {
     compiler::compile_text(
-        "((\n"
+        "()())\n"
         "asdfasdf asd the quick brown fox\n"
         "((\n"
         "asdfasdf asd the quick brown fox\n"
-        "((\n"
+        "(()))()())\n"
         "asdfasdf asd the quick brown fox\n"
         "five j\n"
-        "asdf! fdf"
+        "asdf! fasdfdf"
 
     );
     return 0;
