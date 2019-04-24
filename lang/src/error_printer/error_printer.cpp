@@ -32,9 +32,7 @@ namespace compiler::error_printer
 
         std::cout <<
             colors::red <<
-            "Error on line #" <<
-            line_idx_of_problem + 1 <<
-            ": " <<
+            "Error: " <<
             compile_error.message() <<
             colors::reset <<
             std::endl;

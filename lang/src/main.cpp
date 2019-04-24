@@ -1,12 +1,12 @@
 #include <iostream>
 
-#include "./frontend/frontend.hpp"
+#include "./front_end/front_end.hpp"
 #include "./error_printer/error_printer.hpp"
 
 int main(void)
 {
     std::string text =
-        "()())\n"
+        "asdf()())\n"
         "asdfasdf asd the quick brown fox\n"
         "((\n"
         "asdfasdf asd the quick brown fox\n"
@@ -22,19 +22,7 @@ int main(void)
         const front_end::CompileError & compile_err = std::get<front_end::CompileError>(parse_result);
         std::cout << "Parse Error:" << std::endl;
         compiler::error_printer::print_compiler_error(text, compile_err);
-
-        // std::cout << std::get<front_end::CompileError>(parse_result).message() << std::endl;
     }
-    // compiler::compile_text(
-    //     "()())\n"
-    //     "asdfasdf asd the quick brown fox\n"
-    //     "((\n"
-    //     "asdfasdf asd the quick brown fox\n"
-    //     "(()))()())\n"
-    //     "asdfasdf asd the quick brown fox\n"
-    //     "five j\n"
-    //     "asdf! fasdfdf"
 
-    // );
     return 0;
 }

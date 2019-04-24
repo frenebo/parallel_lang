@@ -1,5 +1,6 @@
-#include "./frontend.hpp"
+#include "./front_end.hpp"
 #include "./lexer/lexer.hpp"
+#include "./parser/parser.hpp"
 
 namespace front_end
 {
@@ -34,6 +35,23 @@ namespace front_end
             );
         }
 
+        std::vector<token::Token> lexed_tokens = std::get<std::vector<token::Token>>(try_lex);
+
+        parser::ParseResult<syntax_tree::program::ProgramTree> try_parse =
+            parser::Parser().parse_program(lexed_tokens);
+
+        if (try_parse.has_error())
+        {
+            const std::string & error_message = try_parse.get_error().message();
+            unsigned long tok_idx = try_parse.get_error().token_position();
+            unsigned long text_idx = 0;
+            for (unsigned long i = 0; i < tok_idx; i++)
+            {
+                text_idx += lexed_tokens[i].text().length();
+            }
+
+            return CompileError(error_message, text_idx);
+        }
         // if (std::ho)
 
         return CompileError("Unimplemented!", 0);

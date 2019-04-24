@@ -28,9 +28,9 @@ namespace front_end::parser
             return _consumed_count;
         }
 
-        bool contains_result()
+        bool has_error()
         {
-            return std::holds_alternative<T>(_contained);
+            return std::holds_alternative<ParseError>();
         }
 
         const T & contained() const

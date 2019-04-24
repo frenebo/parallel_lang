@@ -57,7 +57,7 @@ namespace front_end::lexer
 
     std::optional<token::Token> lex_identifier(const std::string & text, unsigned long start_idx)
     {
-        if (!isalpha(text[start_idx]))
+        if (!isalpha(text[start_idx]) && text[start_idx] != '_')
         {
             return std::optional<token::Token>();
         }
@@ -94,6 +94,8 @@ namespace front_end::lexer
         const std::pair<std::string, token::TokenType> types[] = {
             {"(", token::TokenType::OPEN_PARENTHESIS},
             {")", token::TokenType::CLOSE_PARENTHESIS},
+            {"{", token::TokenType::OPEN_BRACE},
+            {"}", token::TokenType::CLOSE_BRACE},
         };
 
         unsigned long longest_match_length = 0;

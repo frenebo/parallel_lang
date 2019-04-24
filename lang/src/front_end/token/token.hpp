@@ -6,10 +6,19 @@
 namespace front_end::token
 {
     enum TokenType {
+        // Character series beginning in letter or underscore, followed by alpha-numeric or underscore characters.
         IDENTIFIER,
+        // Newlines, spaces, tabs, etc.
         WHITESPACE,
+        // (
         OPEN_PARENTHESIS,
+        // )
         CLOSE_PARENTHESIS,
+        // {
+        OPEN_BRACE,
+        // }
+        CLOSE_BRACE,
+        // Marks end of program
         END_OF_INPUT,
     };
 

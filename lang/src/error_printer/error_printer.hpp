@@ -1,7 +1,7 @@
 #ifndef COMPILER_ERROR_PRINTER
 #define COMPILER_ERROR_PRINTER
 
-#include "../frontend/frontend.hpp"
+#include "../front_end/front_end.hpp"
 #include <iostream>
 
 namespace compiler::error_printer
