@@ -32,6 +32,14 @@ namespace front_end::token
             return "Open Parenthesis";
         case TokenType::CLOSE_PARENTHESIS:
             return "Close Parenthesis";
+        case TokenType::FUNC_ARROW:
+            return "Arrow Function Token";
+        case TokenType::RESULT_KEYWORD:
+            return "Result Keyword";
+        case TokenType::OPEN_BRACE:
+            return "Open Brace";
+        case TokenType::CLOSE_BRACE:
+            return "Open Brace";
         default:
             return "Unimplemented token type to string";
         }

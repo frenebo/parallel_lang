@@ -4,23 +4,16 @@ Using lazy evaluation found in other languages for parallelism?
 
 function delegation?
 
-function mult(int a, int b)
-{
+
+int some_func(int a, int b) => {
     return a + b;
-}
+};
 
-function add(int a, int b)
-{
-    return a + b;
-}
+sorted_list = sort(int_arr, (int lhs, int rhs) => int {
+    return rhs - lhs;
+});
 
-function
-
-function somefunc(int a, int b) => {
-    return a + b;
-}
-
-somefunc (int a, int b) => {
+some_func = (int a, int b) => int {
     return a + b;
 }
 

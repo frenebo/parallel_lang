@@ -30,7 +30,7 @@ namespace front_end::parser
 
         bool has_error()
         {
-            return std::holds_alternative<ParseError>();
+            return std::holds_alternative<ParseError>(_contained);
         }
 
         const T & contained() const

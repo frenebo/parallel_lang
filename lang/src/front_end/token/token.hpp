@@ -10,6 +10,10 @@ namespace front_end::token
         IDENTIFIER,
         // Newlines, spaces, tabs, etc.
         WHITESPACE,
+        // For functions
+        FUNC_ARROW,
+        // Result keyword,
+        RESULT_KEYWORD,
         // (
         OPEN_PARENTHESIS,
         // )

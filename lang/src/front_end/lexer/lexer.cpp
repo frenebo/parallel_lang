@@ -96,6 +96,8 @@ namespace front_end::lexer
             {")", token::TokenType::CLOSE_PARENTHESIS},
             {"{", token::TokenType::OPEN_BRACE},
             {"}", token::TokenType::CLOSE_BRACE},
+            {"=>", token::TokenType::FUNC_ARROW},
+            {"result", token::TokenType::RESULT_KEYWORD},
         };
 
         unsigned long longest_match_length = 0;
